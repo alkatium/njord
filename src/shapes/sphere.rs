@@ -29,6 +29,9 @@ impl Object for Sphere {
     }
 
     fn is_specular(&self) -> bool { 
+
+        println!("Ks {}", self.mat.ks);
+
         if self.mat.ks == 0. {
             return false;
         }

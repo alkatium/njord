@@ -71,9 +71,9 @@ pub trait Object {
                       b: self.get_material().ks
                   };
 
-                  let Is: Color = col_ks * s_scalar.powf(self.get_material().s) * s.intensity;
+                  let is: Color = col_ks * s_scalar.powf(self.get_material().s) * s.intensity;
           
-                  total += Is;
+                  total += is;
                 }
             }
         }
@@ -81,11 +81,11 @@ pub trait Object {
         return total;
     }
 
-    fn ambiant(&self, ambiant: &Intensity) -> Color {
-        return self.get_material().color * self.get_material().ka * ambiant;
+    fn ambient(&self, ambient: &Intensity) -> Color {
+        return self.get_material().color * self.get_material().ka * ambient;
     }
 
-    fn getReflected(&self, obs: &Point, inter: &Intersection) -> Ray {
+    fn get_reflected(&self, obs: &Point, inter: &Intersection) -> Ray {
 
         let l_normalized = Vector {
             dx: obs.x - inter.p.x, 

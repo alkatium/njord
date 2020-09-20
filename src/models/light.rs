@@ -45,7 +45,18 @@ impl ops::Mul<Color> for Intensity {
     }
 }
 
+#[derive(Debug, Clone, Copy)]
 pub struct Light {  
     pub position: Point,
     pub intensity: Intensity
+}
+
+impl Light {
+
+    pub fn default() -> Light {
+        Light {
+            position: Point::center(),
+            intensity: Intensity::default()
+        }
+    }
 }

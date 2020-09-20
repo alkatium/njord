@@ -18,7 +18,7 @@ impl Image {
         let mut color_vec: Vec<Color> = Vec::with_capacity(size as usize);
 
         // set color as black
-        for i in 0..size {
+        for _ in 0..size {
             color_vec.push(Color::black());
         }
         
@@ -51,12 +51,13 @@ impl Image {
         return Color::black();
     }
 
+    #[warn(unused_must_use)]
     pub fn save(&self, filename: &'static str) {
 
         let mut file = File::create(filename).expect("File creation failed");
-        file.write("P3\n".as_bytes());
-        file.write(format!("{} {}\n", self.width, self.height).as_bytes());
-        file.write("255\n".as_bytes());
+        file.write("P3\n".as_bytes()).expect("Error while writing");
+        file.write(format!("{} {}\n", self.width, self.height).as_bytes()).expect("Error while writing");
+        file.write("255\n".as_bytes()).expect("Error while writing");
 
         for y in 0..self.height {
             for x in 0..self.width {
@@ -64,10 +65,11 @@ impl Image {
                 // TODO : check if correct
                 let index: usize = (y * self.width + x) as usize;
                 let color: Color = self.pixels[index];
-                file.write(format!("{} {} {}  ", color.r, color.g, color.b).as_bytes());
+                file.write(format!("{} {} {}  ", (color.r * 255.) as u32, (color.g * 255.) as u32, (color.b * 255.) as u32).as_bytes())
+                    .expect("Error while writing");
             }
 
-            file.write("\n".as_bytes());
+            file.write("\n".as_bytes()).expect("Error while writing");
         }
     }
 }

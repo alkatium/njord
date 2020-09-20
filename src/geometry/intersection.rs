@@ -26,13 +26,13 @@ impl Intersection {
         }
     }
 
-    fn get_couleur(mut self, obs: &mut Intersection, scene: &mut Scene, depth: &mut u32) -> Color {
+    pub fn get_couleur(&self, obs: &Intersection, scene: &mut Scene, depth: &mut u32) -> Color {
 
         let mut reflected = Color::black();
 
-        let ambiant_intensity = match &self.object {
+        let ambient_intensity = match &self.object {
             // dynamic object exists
-            Some(o) => o.ambiant(&scene.ambiant.intensity),
+            Some(o) => o.ambient(&scene.ambient.intensity),
             // object is None, hence default Color
             None    => Color::black()
         };
@@ -55,7 +55,10 @@ impl Intersection {
 
             let r: Ray = match &self.object {
                 // dynamic object exists
-                Some(o) => o.getReflected(&obs.p, &self),
+                Some(o) => {
+                    println!("Inside match{}", o.is_specular());
+                    o.get_reflected(&obs.p, &self)
+                },
                 // object is None, hence default false
                 None    => Ray::default()
             };
@@ -64,13 +67,12 @@ impl Intersection {
 
             if scene.intersect(&r, &mut inter) {
                 *depth = *depth - 1;
-                reflected = inter.get_couleur(&mut self, &mut *scene, depth)
+                reflected = inter.get_couleur(&self, &mut *scene, depth);
             }
-
         }
 
         // compute final color value
-        let sum: Color = ambiant_intensity + direct + reflected;
+        let sum: Color = ambient_intensity + direct + reflected;
 
         return sum;
     }
