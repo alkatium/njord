@@ -26,7 +26,7 @@ impl Intersection {
         }
     }
 
-    fn getCouleur(mut self, obs: &mut Intersection, scene: &Scene, depth: &mut u32) -> Color {
+    fn get_couleur(mut self, obs: &mut Intersection, scene: &mut Scene, depth: &mut u32) -> Color {
 
         let mut reflected = Color::black();
 
@@ -46,7 +46,7 @@ impl Intersection {
 
         let specular = match &self.object {
             // dynamic object exists
-            Some(o) => o.isSpecular(),
+            Some(o) => o.is_specular(),
             // object is None, hence default false
             None    => false
         };
@@ -64,7 +64,7 @@ impl Intersection {
 
             if scene.intersect(&r, &mut inter) {
                 *depth = *depth - 1;
-                reflected = inter.getCouleur(&mut self, scene, depth)
+                reflected = inter.get_couleur(&mut self, &mut *scene, depth)
             }
 
         }
@@ -75,11 +75,11 @@ impl Intersection {
         return sum;
     }
 
-    pub fn getNormal(&self) -> Vector {
+    pub fn get_normal(&self) -> Vector {
 
         return match &self.object {
             // dynamic object exists
-            Some(o) => o.getNormal(&self.p),
+            Some(o) => o.get_normal(&self.p),
             // object is None, hence default false
             None    => Vector::default()
         };

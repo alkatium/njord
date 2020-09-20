@@ -1,6 +1,6 @@
 use crate::components::color::Color;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Material {
     pub color: Color,
     pub ka: f32,

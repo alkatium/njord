@@ -2,7 +2,7 @@ use std::ops;
 
 use crate::models::light::Intensity;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Color {
     pub r: f32,
     pub g: f32,
@@ -23,6 +23,14 @@ impl Color{
             r: 0.,
             g: 0.,
             b: 0.
+        }
+    }
+
+    pub fn to_rgb(&self) -> Color {
+        Color {
+            r: self.r * 255.,
+            g: self.g * 255.,
+            b: self.b * 255.
         }
     }
 }

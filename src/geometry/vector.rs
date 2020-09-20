@@ -22,15 +22,15 @@ impl Vector {
                 .sqrt();
     }
 
-    pub fn dxNorm(&self) -> f32 {
+    pub fn dx_norm(&self) -> f32 {
         return self.dx / self.norm();
     }
 
-    pub fn dyNorm(&self) -> f32 {
+    pub fn dy_norm(&self) -> f32 {
         return self.dy / self.norm();
     }
 
-    pub fn dzNorm(&self) -> f32 {
+    pub fn dz_norm(&self) -> f32 {
         return self.dz / self.norm();
     }
 

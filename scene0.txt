@@ -1,0 +1,13 @@
+# couleur de fond blanche
+background 1.0 1.0 1.O
+# plan horizontal bleu
+material 0.2 0.2 0.98 0.5 0.3 10
+plane 0 1 0 0
+# plan vertical noir
+material 0.0 0.0 0.0 0.1 0.7 100
+plane 0 0 1 -5
+# sphère rouge
+material 0.9 0.2 0.2 0.5 0.1 10
+sphere 0 0 -3 0.5
+# une source blanche
+light 0 10 0 2 2 2

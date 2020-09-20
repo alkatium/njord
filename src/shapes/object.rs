@@ -13,9 +13,9 @@ pub trait Object {
 
     fn new() -> Self where Self: Sized;
 
-    fn getNormal(&self, p: &Point) -> Vector;
-    fn getMaterial(&self) -> Material;
-    fn isSpecular(&self) -> bool;
+    fn get_normal(&self, p: &Point) -> Vector;
+    fn get_material(&self) -> Material;
+    fn is_specular(&self) -> bool;
     fn intersect(&self, r: &Ray, inter: &mut Intersection) -> bool;
     fn cut(&self, ray: &Ray) -> bool;
 
@@ -40,9 +40,9 @@ pub trait Object {
 
             if !scene.cut(&ray) {
 
-                let kd: Color = self.getMaterial().color * self.getMaterial().kd;
+                let kd: Color = self.get_material().color * self.get_material().kd;
 
-                let n: Vector  = inter.getNormal().normalized();
+                let n: Vector  = inter.get_normal().normalized();
     
                 let d_scalar: f32 = l_normalized * n;
 
@@ -66,12 +66,12 @@ pub trait Object {
 
                 if s_scalar > 0. {
                   let col_ks: Color = Color{
-                      r: self.getMaterial().ks, 
-                      g: self.getMaterial().ks, 
-                      b: self.getMaterial().ks
+                      r: self.get_material().ks, 
+                      g: self.get_material().ks, 
+                      b: self.get_material().ks
                   };
 
-                  let Is: Color = col_ks * s_scalar.powf(self.getMaterial().s) * s.intensity;
+                  let Is: Color = col_ks * s_scalar.powf(self.get_material().s) * s.intensity;
           
                   total += Is;
                 }
@@ -82,7 +82,7 @@ pub trait Object {
     }
 
     fn ambiant(&self, ambiant: &Intensity) -> Color {
-        return self.getMaterial().color * self.getMaterial().ka * ambiant;
+        return self.get_material().color * self.get_material().ka * ambiant;
     }
 
     fn getReflected(&self, obs: &Point, inter: &Intersection) -> Ray {
@@ -93,7 +93,7 @@ pub trait Object {
             dz: obs.z - inter.p.z
         }.normalized();
 
-        let n = inter.getNormal().normalized();
+        let n = inter.get_normal().normalized();
 
         let r = (n * 2. * (n * l_normalized) - l_normalized).normalized();
 
