@@ -8,20 +8,29 @@ pub struct Vector {
 }
 
 impl Vector {
-    fn norm(&self) -> f32 {
+
+    pub fn default() -> Vector {
+        Vector {
+            dx: 0.,
+            dy: 0.,
+            dz: 0.
+        }
+    }
+
+    pub fn norm(&self) -> f32 {
         return (self.dx * self.dx + self.dy * self.dy + self.dz * self.dz)
                 .sqrt();
     }
 
-    fn dxNorm(&self) -> f32 {
+    pub fn dxNorm(&self) -> f32 {
         return self.dx / self.norm();
     }
 
-    fn dyNorm(&self) -> f32 {
+    pub fn dyNorm(&self) -> f32 {
         return self.dy / self.norm();
     }
 
-    fn dzNorm(&self) -> f32 {
+    pub fn dzNorm(&self) -> f32 {
         return self.dz / self.norm();
     }
 }

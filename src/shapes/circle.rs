@@ -14,6 +14,17 @@ pub struct Circle {
 
 impl Object for Circle {
 
+    fn new() -> Circle {
+        mat: Material {
+            color: Color::one(),
+            kd: 10.,
+            ks: 10.,
+            s: 10.
+        }, 
+        center: Point {x: 0., y:0.}, 
+        radius: 1.
+    }
+
     fn intersect(&self, r: Ray, inter: Intersection) -> bool {
         let dist_origin_center = self.centre.dist(self.r.getOrigin());
 

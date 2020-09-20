@@ -6,12 +6,21 @@ use crate::geometry::intersection::Intersection;
 use crate::components::material::Material;
 use crate::components::color::Color;
 
-use crate::model::scene::Scene;
+use crate::models::scene::Scene;
+use crate::models::light::Intensity;
 
 pub trait Object {
 
-    fn intersect(&self, r: Ray, inter: Intersection) -> bool;
-    fn getNormal(&self, p: Point) -> Vector;
+    fn new() -> Self where Self: Sized;
+
+    fn getNormal(&self, p: &Point) -> Vector;
     fn getMaterial(&self) -> Material;
-    fn direct(&self, obs: Point, sc: Scene, inter: Intersection) -> Color;
+    fn isSpecular(&self) -> bool;
+
+    fn direct(&self, obs: &Point, sc: &Scene, inter: &Intersection) -> Color;
+    fn ambiant(&self, ambiant: &Intensity) -> Color;
+
+    fn intersect(&self, r: &Ray, inter: &mut Intersection) -> bool;
+    fn cut(&self, ray: &Ray) -> bool;
+    fn getReflected(&self, obs: &Point, inter: &Intersection) -> Ray;
 }

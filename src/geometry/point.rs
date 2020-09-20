@@ -12,4 +12,12 @@ impl Point {
                 (p.z - self.z) * (p.z - self.z))
                 .sqrt();
     }
+
+    pub fn center() -> Point {
+        Point {
+            x: 0.,
+            y: 0.,
+            z: 0.
+        }
+    }
 }
