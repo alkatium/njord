@@ -1,6 +1,6 @@
 use std::ops;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Vector {
     pub dx: f32,
     pub dy: f32,

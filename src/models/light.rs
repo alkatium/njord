@@ -2,6 +2,7 @@ use std::ops;
 use crate::geometry::point::Point;
 use crate::components::color::Color;
 
+#[derive(Debug, Clone, Copy)]
 pub struct Intensity {  
     pub er: f32,
     pub eg: f32,

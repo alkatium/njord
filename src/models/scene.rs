@@ -50,7 +50,7 @@ impl Scene {
     pub fn cut(&self, ray: &Ray) -> bool {
 
         for obj in &self.objects {
-            if obj.cut(ray) {
+            if obj.cut(&ray) {
                 return true;
             }
         }
