@@ -2,8 +2,26 @@ use crate::components::color::Color;
 
 #[derive(Debug)]
 pub struct Material {
-    color: Color,
-    kd: f32,
-    ks: f32,
-    s: f32
+    pub color: Color,
+    pub ka: f32,
+    pub kd: f32,
+    pub ks: f32,
+    pub s: f32
+}
+
+impl Material {
+
+    pub fn default() -> Material {
+        Material {
+            color: Color {
+                r: 0.8,
+                g: 0.8,
+                b: 0.8
+            },
+            ka: 0.5,
+            kd: 0.5,
+            ks: 0.5,
+            s: 10.
+        }
+    }
 }

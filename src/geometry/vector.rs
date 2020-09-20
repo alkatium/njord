@@ -33,6 +33,16 @@ impl Vector {
     pub fn dzNorm(&self) -> f32 {
         return self.dz / self.norm();
     }
+
+    pub fn normalized(&self) -> Vector {
+        let norm = self.norm();
+
+        return Vector {
+            dx: self.dx / norm,
+            dy: self.dy / norm,
+            dz: self.dz / norm,
+        }
+    }
 }
 
 impl ops::Add<Vector> for Vector {
@@ -66,7 +76,8 @@ impl ops::Mul<Vector> for Vector {
     type Output = f32;
 
     fn mul(self, v: Vector) -> f32 {
-        return self.dx * v.dx + self.dy * v.dy + self.dz * v.dz;
+        return self.dx * v.dx + self.dy * v.dy +self.dz * v.dz;
+
     }
 }
 

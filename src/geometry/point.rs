@@ -1,3 +1,5 @@
+use std::ops;
+
 #[derive(Debug)]
 pub struct Point {
     pub x: f32,
@@ -19,5 +21,31 @@ impl Point {
             y: 0.,
             z: 0.
         }
+    }
+}
+
+impl ops::Sub<Point> for Point {
+
+    type Output = Point;
+
+    fn sub(self, p: Point) -> Point {
+        return Point { 
+            x: self.x - p.x, 
+            y: self.y - p.y, 
+            z: self.z - p.z
+        };
+    }
+}
+
+impl ops::Add<Point> for Point {
+
+    type Output = Point;
+
+    fn add(self, p: Point) -> Point {
+        return Point { 
+            x: self.x + p.x, 
+            y: self.y + p.y, 
+            z: self.z + p.z
+        };
     }
 }

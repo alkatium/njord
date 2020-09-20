@@ -4,25 +4,25 @@ use crate::models::light::Intensity;
 
 #[derive(Debug)]
 pub struct Color {
-    r: u32,
-    g: u32,
-    b: u32
+    pub r: f32,
+    pub g: f32,
+    pub b: f32
 }
 
 impl Color{
     pub fn white() -> Color {
         Color {
-            r: 255,
-            g: 255,
-            b: 255
+            r: 1.,
+            g: 1.,
+            b: 1.
         }
     }
 
     pub fn black() -> Color {
         Color {
-            r: 0,
-            g: 0,
-            b: 0
+            r: 0.,
+            g: 0.,
+            b: 0.
         }
     }
 }
@@ -70,22 +70,22 @@ impl ops::AddAssign<Intensity> for Color {
     fn add_assign(&mut self, i: Intensity) {
         
         *self = Self {
-            r: (self.r as f32 + i.er) as u32,
-            g: (self.r as f32 + i.eg) as u32,
-            b: (self.r as f32 + i.eb) as u32
+            r: self.r + i.er,
+            g: self.r + i.eg,
+            b: self.r + i.eb
         };
     }
 }
 
-impl ops::Mul<f32> for Color {
+impl ops::Mul<&Intensity> for Color {
 
     type Output = Color;
 
-    fn mul(self, k: f32) -> Color {
+    fn mul(self, i: &Intensity) -> Color {
         return Color { 
-            r: (self.r as f32 * k) as u32, 
-            g: (self.g as f32 * k) as u32, 
-            b: (self.b as f32 * k) as u32, 
+            r: self.r * i.er,
+            g: self.r * i.eg,
+            b: self.r * i.eb
         };
     }
 }
@@ -96,9 +96,22 @@ impl ops::Mul<Intensity> for Color {
 
     fn mul(self, i: Intensity) -> Color {
         return Color { 
-            r: (self.r as f32 * i.er) as u32,
-            g: (self.r as f32 * i.eg) as u32,
-            b: (self.r as f32 * i.eb) as u32
+            r: self.r * i.er,
+            g: self.r * i.eg,
+            b: self.r * i.eb
+        };
+    }
+}
+
+impl ops::Mul<f32> for Color {
+
+    type Output = Color;
+
+    fn mul(self, k: f32) -> Color {
+        return Color { 
+            r: self.r * k, 
+            g: self.g * k, 
+            b: self.b * k, 
         };
     }
 }

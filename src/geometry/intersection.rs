@@ -26,7 +26,7 @@ impl Intersection {
         }
     }
 
-    fn getCouleur(mut self, obs: &mut Intersection, scene: Scene, depth: &mut u32) -> Color {
+    fn getCouleur(mut self, obs: &mut Intersection, scene: &Scene, depth: &mut u32) -> Color {
 
         let mut reflected = Color::black();
 

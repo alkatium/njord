@@ -1,5 +1,6 @@
 use std::ops;
 use crate::geometry::point::Point;
+use crate::components::color::Color;
 
 pub struct Intensity {  
     pub er: f32,
@@ -26,6 +27,19 @@ impl ops::Mul<f32> for Intensity {
             er: self.er * k, 
             eg: self.eg * k, 
             eb: self.eb * k
+        };
+    }
+}
+
+impl ops::Mul<Color> for Intensity {
+
+    type Output = Intensity;
+
+    fn mul(self, c: Color) -> Intensity {
+        return Intensity { 
+            er: self.er * c.r, 
+            eg: self.eg * c.g, 
+            eb: self.eb * c.b
         };
     }
 }
